@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>StudyPilot AI — Intelligent Study Assistant</title>
+<style>
+:root{--navy:#14213d;--ink:#182230;--muted:#667085;--line:#e5eaf2;--bg:#f4f7fb;--white:#fff;--purple:#5548e8;--pale:#eeedff;--green:#087f5b;--palegreen:#e8f7f0;--orange:#b45309}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font:15px/1.55 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink)}
+header{background:var(--navy);color:#fff;padding:17px max(20px,calc((100% - 1200px)/2));display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:11px}.logo{height:42px;width:42px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(140deg,#a5b4fc,#6d28d9);font-size:23px}.brand strong{display:block;font-size:17px}.brand small{color:#cbd5e1}.header-tag{font-size:11px;border:1px solid #475467;border-radius:999px;padding:7px 11px;color:#e4e7ec;letter-spacing:.08em}
+main{max-width:1200px;margin:27px auto;padding:0 20px 42px}.hero{display:flex;justify-content:space-between;align-items:flex-end;gap:22px;flex-wrap:wrap;margin-bottom:22px}.eyebrow{color:var(--purple);font-size:11px;font-weight:800;letter-spacing:.13em;text-transform:uppercase}.hero h1{font-size:clamp(27px,4vw,38px);letter-spacing:-.045em;line-height:1.14;margin:7px 0 10px}.hero p{color:var(--muted);max-width:710px;margin:0}.ready{border-radius:999px;background:var(--palegreen);color:var(--green);font-size:12px;font-weight:750;padding:8px 12px}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin:20px 0}.metric,.panel{background:var(--white);border:1px solid var(--line);border-radius:17px;box-shadow:0 5px 20px #172b4d06}.metric{padding:16px}.metric span{font-size:12px;color:var(--muted)}.metric strong{display:block;font-size:24px;letter-spacing:-.04em;margin:4px 0 2px}.metric small{font-size:11px;color:var(--muted)}
+.columns{display:grid;grid-template-columns:365px minmax(0,1fr);gap:17px;align-items:start}.panel{padding:21px}.panel h2{font-size:18px;letter-spacing:-.02em;margin:0}.description{font-size:12px;color:var(--muted);margin:5px 0 18px}.field{margin:14px 0}.field label{font-size:12px;font-weight:750;display:block;margin-bottom:6px}.field input,.field select{width:100%;font:inherit;font-size:14px;padding:11px 12px;border:1px solid #d0d5dd;border-radius:10px;background:white;color:var(--ink);outline:0}.field input:focus,.field select:focus{border-color:var(--purple);box-shadow:0 0 0 3px #5548e81a}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.btn{width:100%;border:0;border-radius:10px;padding:12px 14px;font:inherit;font-weight:750;cursor:pointer;background:var(--purple);color:white}.btn:hover{background:#4338ca}.btn.light{margin-top:9px;color:var(--purple);background:#fff;border:1px solid #c7d2fe}.hint{font-size:11px;color:var(--muted);margin:11px 0 0}
+.right{display:grid;gap:17px}.panel-title{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.pill{font-size:10px;font-weight:800;letter-spacing:.08em;padding:5px 8px;border-radius:999px;background:var(--pale);color:#4338ca}.empty{border:1px dashed #c7cedb;border-radius:13px;text-align:center;padding:26px 15px;color:var(--muted);margin-top:15px}.empty .symbol{font-size:29px}.empty strong{display:block;color:var(--ink);margin:7px 0 3px}
+.plan-list{display:grid;gap:9px;margin-top:14px}.plan-row{display:grid;grid-template-columns:39px minmax(0,1fr) auto;align-items:center;gap:11px;border:1px solid var(--line);border-radius:12px;padding:12px}.rank{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;background:var(--pale);color:var(--purple);font-weight:850;font-size:12px}.plan-row h3{font-size:14px;margin:0}.plan-row p{font-size:11px;color:var(--muted);margin:3px 0 0}.minutes{font-size:12px;font-weight:800;white-space:nowrap}.bar-wrap{margin-top:17px}.bar-label{display:flex;justify-content:space-between;color:var(--muted);font-size:11px;margin-bottom:6px}.bar{height:8px;border-radius:99px;background:#eef1f6;overflow:hidden}.bar i{height:100%;display:block;width:0;background:linear-gradient(90deg,#6366f1,#a78bfa);transition:width .3s}
+.explain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}.explain{border:1px solid var(--line);background:#fafbff;border-radius:12px;padding:12px}.explain b{display:block;font-size:11px;margin-bottom:5px}.explain p{font-size:11px;color:var(--muted);margin:0}.analysis{margin-top:14px;padding:13px;border-radius:12px;background:#f8fafc;border:1px solid var(--line);font-size:12px;color:#475467}.analysis b{color:var(--ink)}.footnote{font-size:11px;color:var(--muted);border-top:1px solid var(--line);padding-top:12px;margin-top:14px}
+@media(max-width:900px){.columns{grid-template-columns:1fr}.metrics{grid-template-columns:repeat(2,1fr)}.explain-grid{grid-template-columns:1fr}}@media(max-width:480px){main{padding:0 13px 30px}.panel{padding:16px}.metrics{gap:8px}.metric{padding:12px}.metric strong{font-size:21px}.plan-row{grid-template-columns:36px minmax(0,1fr)}.minutes{grid-column:2}.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><div class="brand"><div class="logo">✦</div><div><strong>StudyPilot AI</strong><small>Intelligent Study Assistant · Planning Agent</small></div></div><div class="header-tag">AI MINI-CAPSTONE PROTOTYPE</div></header>
+<main>
+<section class="hero"><div><div class="eyebrow">Personalized academic planning</div><h1>Make every study session count.</h1><p>Enter your subjects, difficulty levels, exam timeline and available time. StudyPilot uses a transparent planning strategy to prioritize work and create a practical daily schedule.</p></div><div class="ready">● Interactive prototype</div></section>
+<section class="metrics">
+<div class="metric"><span>Subjects</span><strong id="mSubjects">3</strong><small>Included in this plan</small></div>
+<div class="metric"><span>Daily study time</span><strong id="mHours">3 hrs</strong><small>Your available time</small></div>
+<div class="metric"><span>Study sessions</span><strong id="mSessions">3</strong><small>Suggested blocks per day</small></div>
+<div class="metric"><span>Plan status</span><strong id="mStatus" style="font-size:19px">Ready</strong><small id="mSub">Generate to refresh plan</small></div>
+</section>
+<div class="columns">
+<section class="panel"><h2>Plan your study</h2><p class="description">Customize the inputs to match your academic needs.</p>
+<div class="field"><label for="subjects">Subjects and difficulty</label><input id="subjects" value="Artificial Intelligence: Hard, DBMS: Medium, Mathematics: Hard" placeholder="AI: Hard, DBMS: Medium, Java: Easy"></div>
+<div class="grid2"><div class="field"><label for="days">Days until exam</label><input id="days" type="number" min="1" max="90" value="7"></div><div class="field"><label for="hours">Study hours per day</label><input id="hours" type="number" min="1" max="12" value="3"></div></div>
+<div class="field"><label for="goal">Study goal</label><select id="goal"><option value="exam">Exam preparation</option><option value="revision">Revision and recall</option><option value="assignment">Complete assignments</option></select></div>
+<div class="field"><label for="strategy">Planning strategy</label><select id="strategy"><option value="balanced">Balanced — difficulty + urgency</option><option value="urgent">Urgency first</option><option value="hard">Difficult subjects first</option><option value="equal">Equal time for each subject</option></select></div>
+<button class="btn" id="generate">✦ Generate study plan</button><button class="btn light" id="reset">Reset sample inputs</button>
+<p class="hint">Format: Subject: Difficulty, Subject: Difficulty. Difficulty can be Easy, Medium or Hard.</p></section>
+<div class="right">
+<section class="panel"><div class="panel-title"><h2>Recommended daily schedule</h2><span class="pill">PLANNING AGENT</span></div><p class="description">Your study order and time allocation, based on the selected strategy.</p>
+<div id="plan" class="plan-list"></div>
+<div class="bar-wrap"><div class="bar-label"><span>Daily time allocated</span><span id="barText">100%</span></div><div class="bar"><i id="barFill" style="width:100%"></i></div></div>
+<div class="analysis" id="analysis"><b>Plan summary:</b> Difficult subjects receive more time under the balanced strategy. Use the schedule as a recommendation and adjust it based on your progress.</div>
+</section>
+<section class="panel"><h2>How the planning agent works</h2><p class="description">The prototype follows an input → decision → output workflow.</p>
+<div class="explain-grid"><div class="explain"><b>01 · INPUT</b><p>Subjects, difficulty, days remaining, daily hours and selected goal.</p></div><div class="explain"><b>02 · PLAN</b><p>Calculate priority scores, rank subjects and divide available minutes.</p></div><div class="explain"><b>03 · OUTPUT</b><p>Show an ordered schedule with suggested time for each subject.</p></div></div>
+<p class="footnote"><b>Technical scope:</b> This is a rule-based planning-agent prototype, not a trained machine-learning model or connected LLM. For the capstone, your team should test it with sample inputs, compare it with equal-time allocation, record observations, and explain its limitations.</p></section>
+</div></div>
+<footer style="text-align:center;color:#98a2b3;font-size:11px;margin-top:23px">StudyPilot AI · AI-Based Intelligent Study Assistant Using a Planning Agent</footer>
+</main>
+<script>
+const el=id=>document.getElementById(id);
+function escapeHTML(v){return v.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function readSubjects(){return el('subjects').value.split(',').map(x=>x.trim()).filter(Boolean).map((item,index)=>{const p=item.split(':');const name=p[0].trim();const d=(p[1]||'Medium').trim().toLowerCase();const level=d.includes('hard')?3:d.includes('easy')?1:2;return{name,level,label:level===3?'Hard':level===1?'Easy':'Medium',index};});}
+function makePlan(){
+ const subjects=readSubjects();const days=Math.max(1,Math.min(90,Number(el('days').value)||1));const hours=Math.max(1,Math.min(12,Number(el('hours').value)||1));const strategy=el('strategy').value;const goal=el('goal').value;
+ if(!subjects.length){el('plan').innerHTML='<div class="empty"><div class="symbol">✎</div><strong>Add a subject first</strong>Example: AI: Hard, DBMS: Medium</div>';return;}
+ const scored=subjects.map(s=>({...s,score:strategy==='equal'?1:strategy==='urgent'?s.level+1.4:strategy==='hard'?s.level*1.8:s.level+(s.level===3?0.8:0.2)}));
+ scored.sort((a,b)=>b.score-a.score||a.index-b.index);
+ const totalMinutes=hours*60;const sum=scored.reduce((a,s)=>a+s.score,0);let allocated=0;
+ const plan=scored.map((s,i)=>{let mins=i===scored.length-1?totalMinutes-allocated:Math.max(15,Math.round((totalMinutes*s.score/sum)/5)*5);mins=Math.min(mins,totalMinutes-allocated);allocated+=mins;return{...s,mins};}).filter(x=>x.mins>0);
+ const activity=goal==='revision'?'Recall key concepts and solve quick questions':goal==='assignment'?'Complete a defined assignment task':'Review concepts and practise questions';
+ el('plan').innerHTML=plan.map((s,i)=>`<div class="plan-row"><div class="rank">${String(i+1).padStart(2,'0')}</div><div><h3>${escapeHTML(s.name)} <span style="font-weight:500;color:#667085">· ${s.label}</span></h3><p>${activity} · Repeat over ${days} day${days===1?'':'s'}</p></div><div class="minutes">${s.mins} min</div></div>`).join('');
+ el('mSubjects').textContent=subjects.length;el('mHours').textContent=hours+' hrs';el('mSessions').textContent=plan.length;el('mStatus').textContent='Generated';el('mSub').textContent=days+'-day planning window';
+ const pct=Math.round(plan.reduce((a,s)=>a+s.mins,0)/totalMinutes*100);el('barText').textContent=pct+'%';el('barFill').style.width=pct+'%';
+ const hard=subjects.filter(s=>s.level===3).length;
+ el('analysis').innerHTML=`<b>Plan summary:</b> ${plan[0].name} is scheduled first under the selected strategy. There ${hard===1?'is 1 difficult subject':'are '+hard+' difficult subjects'} in your input. The plan allocates ${totalMinutes} minutes per day across ${plan.length} subjects. This is a suggested schedule, not a guarantee of exam performance.`;
+}
+el('generate').addEventListener('click',makePlan);
+el('reset').addEventListener('click',()=>{el('subjects').value='Artificial Intelligence: Hard, DBMS: Medium, Mathematics: Hard';el('days').value=7;el('hours').value=3;el('goal').value='exam';el('strategy').value='balanced';makePlan();});
+makePlan();
+</script>
+</body></html>
